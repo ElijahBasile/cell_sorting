@@ -1,0 +1,49 @@
+<CompuCell3D Revision="20171208" Version="3.7.7">
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="100" y="100" z="1"/>
+      <Steps>10000</Steps>
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>3</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="A"/>
+      <CellType TypeId="2" TypeName="B"/>
+   </Plugin>
+   
+   <Plugin Name="Volume"/>
+   
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+   
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium" Type2="Medium">20.0</Energy>
+      <Energy Type1="Medium" Type2="A">20.0</Energy>
+      <Energy Type1="Medium" Type2="B">20.0</Energy>
+      <Energy Type1="A" Type2="A">20.0</Energy>
+      <Energy Type1="A" Type2="B">1.0</Energy>
+      <Energy Type1="B" Type2="B">20.0</Energy>
+      <NeighborOrder>3</NeighborOrder>
+   </Plugin>
+   
+   <Steppable Type="BlobInitializer">
+      
+      <!-- Initial layout of cells in the form of spherical (circular in 2D) blob -->
+      <Region>
+         <Center x="50" y="50" z="0"/>
+         <Radius>40</Radius>
+         <Gap>0</Gap>
+         <Width>5</Width>
+         <Types>A,B</Types>
+      </Region>
+   </Steppable>
+</CompuCell3D>
